@@ -1,13 +1,10 @@
 @import 'node_modules/modern-normalize/modern-normalize.css';
 
-* {
-    width: 100%;
-    height: 100%;
-}
-
 body {
+    width: 100%;
+    min-height: 100vh;
     display: grid;
-    grid-template: min-content 2fr min-content/ repeat(3, 1fr);
+    grid-template: min-content 2fr min-content / repeat(3, 1fr);
     grid-template-areas: 
                     "navbar navbar navbar"
                     "main main main"
@@ -16,8 +13,7 @@ body {
 
 .navbar {
     grid-area: navbar;
-    border: 2px solid red;
-    background-color:aqua
+    background-color: #d97706;
 }
 
 .nav{
@@ -30,11 +26,6 @@ body {
     align-content: center;
 }
 
-input {
-    width: 20vw;
-    height: 4vh;
-    text-align: right;
-}
 
 ul {
     list-style: none;
@@ -44,57 +35,81 @@ p{
     margin: 0;
     padding: 0;
 }
+
+/* Styling the Main  */
 .main{
     padding: 1rem;
     grid-area: main;
-    grid-row: 2 / 3;
-    border: 2px solid blue;
     color: black;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: min-content repeat(2, 1fr);
+    grid-template-rows: min-content 1fr;
 }
 
-.main-card{
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
-}
-
-.main > h3 {
-    grid-row: 1 / 2;
-    grid-column: 1 / 3;
-}
-
-.complete-card, .ongoing-card{
+.main-navbar {
     display: grid;
-    grid-template-rows: min-content;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 2fr min-content;
+    align-items: center;
+}
+
+
+.card{
+    display: grid;
     gap: 1rem;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: repeat(2, 1fr);
 }
 
-.complete-card{
-    border: 1px solid orange;
-    grid-row: 2 / 3;
-    grid-column: 1 / 5;
- 
+.form-container-external {
+     grid-column:  1 / 2;
+     border: 1px solid black;
 }
 
-.ongoing-card{
-    border: 1px solid aquamarine;
-    grid-row: 3 / 4;
-}
-
-.top-card, .bottom-card{
-    grid-row: 2 / 3;
+/* Styling the form */
+form {
+    border: 0.1rem solid black;
+    border-radius: 4px;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-rows: repeat(4, 1fr);
     padding: 1rem;
-    border: 0.1rem solid grey;
 }
 
-img{
-    width: 2rem;
+.dialog > .form-container{
+    min-width: 100%;
+}
+
+form > div {
+    padding: 0.1rem;
+}
+
+button{
+    width: 3rem;
     height: 2rem;
+    background-color: #a3a3a3;
+    color: white;
 }
 
+.submit-btn, .exit-btn, .reset-btn{
+    width: 4rem;
+    border-radius: 4px;
+    outline: none;
+}
+
+.submit-btn{
+    background-color: #22c55e;
+}
+
+.exit-btn{
+    background-color: #ef4444;
+}
+
+input, select {
+    width: 100%;
+    height: 50%;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: left;
+}
 
 .footer{
     grid-area: footer;

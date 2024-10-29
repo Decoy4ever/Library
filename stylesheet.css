@@ -31,9 +31,15 @@ ul {
     list-style: none;
 }
 
+h3{
+    padding: 0;
+    margin: 0;
+}
 p{
     margin: 0;
     padding: 0;
+    font-size: 1rem;
+    font-weight: normal;
 }
 
 /* Styling the Main  */
@@ -51,17 +57,15 @@ p{
     align-items: center;
 }
 
-
-.card{
+.main-card{
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, max-content);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
+    grid-template-rows: repeat(auto-fit, minmax(200px, 30%));
 }
 
-.form-container-external {
-     grid-column:  1 / 2;
-     border: 1px solid black;
+.card{
+    border: 1px solid black;
 }
 
 /* Styling the form */

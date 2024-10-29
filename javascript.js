@@ -19,14 +19,16 @@
         * if user has read it will move into the completed card else move to the ongoing card section
 */
 
-const modal = document.querySelector('.button-modal');
 const dialog = document.querySelector('.dialog');
+const modal = document.querySelector('.button-modal');
 const closeBtn = document.querySelector('.exit-btn');
 const submitBtn = document.querySelector(".submit-btn");
-const ongoingCard= document.querySelector(".ongoing-card");
+const mainCard = document.querySelector(".main-card");
+// const card = document.querySelector(".card")
+
 const author = document.querySelector(".author")
 const title = document.querySelector(".title")
-const numberOfpgs = document.querySelector(".num_pgs")
+const numberOfpgs = document.querySelector(".pages")
  
 function Library()
 {
@@ -80,21 +82,27 @@ function openCloseDialog()
         submitBtn.addEventListener('click',(e) => 
         {
             lib.displayInfoBook();
-
-            // create a HTML
-            const form = document.createElement('form');
-            // const labelForm = document.createElement('label');
-            // const inputForm = document.createElement('input');
-
             const div = document.createElement('div');
             const classAttName = document.createAttribute('class');
+            // retrieve the card class and set it to the div
             classAttName.value = "card";
             div.setAttributeNode(classAttName);
-            const textContent = document.createTextNode(`${author.value}, ${title.value}, ${numberOfpgs.value}`);
-            div.appendChild(textContent);
 
+            // create and set the Header
+            const headerBk = document.createElement('h3');
+            headerBk.textContent = `${title.value}`;
+            div.appendChild(headerBk);
 
-            document.querySelector('.form-container-external').insertAdjacentElement("afterend", div);
+            // create a two more divs 
+            const paraAuthor = document.createElement('p');
+            paraAuthor.textContent = `Author: ${author.value}`
+            div.appendChild(paraAuthor);
+
+            const paraNumOfpgs = document.createElement('p');
+            paraNumOfpgs.textContent = `Pages: ${numberOfpgs.value}`
+            div.appendChild(paraNumOfpgs);
+
+            mainCard.appendChild(div);
         })
         
     })

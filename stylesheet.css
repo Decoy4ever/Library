@@ -66,6 +66,10 @@ p{
 
 .card{
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Styling the form */
@@ -86,7 +90,7 @@ form > div {
     padding: 0.1rem;
 }
 
-button{
+.button-modal{
     width: 3rem;
     height: 2rem;
     background-color: #a3a3a3;

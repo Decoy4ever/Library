@@ -1,30 +1,8 @@
-/*  // Initial Plan (ongoing changes)
-    // 1. Create a var that stores all the book objects (in array object)
-    
-    // 2. Book constructor that will have the following properties
-        * title of book
-        * author of the book
-        * number of pages
-        * status if user has read or not
-    
-    // 3. `addBook()` will display a form where user inputs this data
-        *  Use a `dialog` show a popbox that presents a form
-        *  Create a html form (in js or html?) used the properties from the Book constructor
-        *  Form will have a submit button and refresh button.
-            * if user selects submit button it will close the `dialog`
-            * if user selects refesh button it will remove all existing text in the form    
-
-    // 4. `displayBook()` will display the inputed form into one of the cards
-        * use if else statement to check if a user has read or not
-        * if user has read it will move into the completed card else move to the ongoing card section
-*/
-
 const dialog = document.querySelector('.dialog');
 const modal = document.querySelector('.button-modal');
 const closeBtn = document.querySelector('.exit-btn');
 const submitBtn = document.querySelector(".submit-btn");
 const mainCard = document.querySelector(".main-card");
-
 const author_input = document.querySelector(".author");
 const title_input = document.querySelector(".title");
 const pages_input = document.querySelector(".pages");
@@ -73,11 +51,12 @@ Library.prototype.addBookToLibrary = function(book)
 Library.prototype.displayInfoBook = function(book)
 {
     // add book to library instance and call the method addBookToLibrary
-    lib.addBookToLibrary(book);
+    mainCard.textContent = "";
 
-    // loop throught the books and print one each
+    lib.addBookToLibrary(book);
     lib.myLibraryOfBooks.forEach((indexBk) => 
-    {    
+    {   
+        // create a card
         const div = document.createElement('div');
         const classAttName = document.createAttribute('class');
         classAttName.value = "card";
@@ -98,36 +77,26 @@ Library.prototype.displayInfoBook = function(book)
         paraNumOfpgs.textContent = `Pages: ${indexBk.pages}`
         div.appendChild(paraNumOfpgs);
 
-        // create button
+        // create button and change status
         const statusBtn = document.createElement('button');
         statusBtn.textContent = `${indexBk.status}`;
-        console.log(statusBtn.textContent)
         statusBtn.addEventListener('click',() => 
         {
             if(statusBtn.textContent === "Completed")
             {
                 statusBtn.textContent = "Ongoing";
-                console.log(statusBtn.textContent);
             }
             else if(statusBtn.textContent = "Ongoing")
             {
                 statusBtn.textContent = "Completed"
-                console.log(statusBtn.textContent)
             }
         })
 
         div.appendChild(statusBtn);
-        mainCard.appendChild(div);
-        
-        // check the current library
+        mainCard.appendChild(div); 
         lib.myLibraryOfBooks[indexBk];
     })
-    console.log(lib.myLibraryOfBooks);
-
 }
-
-// Probelm user enter a new book it displays all of the elements in book which duplicate more objects
-
 
 // openCloseDialog() inherit the properties of Library
 Object.setPrototypeOf(openCloseDialog.prototype, Library.prototype)
@@ -143,23 +112,18 @@ function openCloseDialog()
         // if usr presses submit btn event
         submitBtn.addEventListener('click',(e) => 
         {
-            lib.displayInfoBook();        
+            lib.displayInfoBook();  
+        })      
+
+        // close the form
+        closeBtn.addEventListener('click',(e) => 
+        {
+            e.preventDefault();
+            dialog.close();
         })
-        
     })
+
     
-    // close the form
-    closeBtn.addEventListener('click',(e) => 
-    {
-        e.preventDefault();
-        dialog.close();
-    })
-
-    title_input.value = "";
-    author_input.value = "";
-    pages_input.value = "";
-
-        
 }
 
 openCloseDialog()

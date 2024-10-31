@@ -13,7 +13,7 @@ body {
 
 .navbar {
     grid-area: navbar;
-    background-color: #d97706;
+    background-color: #eab308;
 }
 
 .nav{
@@ -29,6 +29,11 @@ body {
 
 ul {
     list-style: none;
+}
+
+li > a {
+    text-decoration: none;
+    color: black;
 }
 
 h3{
@@ -93,7 +98,8 @@ form > div {
 .button-modal{
     width: 3rem;
     height: 2rem;
-    background-color: #a3a3a3;
+    background-color: #22c55e;
+    border: none;
     color: white;
 }
 
@@ -121,8 +127,9 @@ input, select {
 
 .footer{
     grid-area: footer;
-    border: 2px solid green;
     grid-row: 4 / 5;
-    background-color: black;
-    color: white;
+    background-color: #facc15;
+    color: black;
+    display: flex;
+    justify-content: center;
 }

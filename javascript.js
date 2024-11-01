@@ -1,6 +1,6 @@
 const dialog = document.querySelector('.dialog');
-const modal = document.querySelector('.button-modal');
-const closeBtn = document.querySelector('.exit-btn');
+const showModal = document.querySelector('.show-modal');
+const closeModal = document.querySelector('.exit-btn');
 const submitBtn = document.querySelector(".submit-btn");
 const mainCard = document.querySelector(".main-card");
 const author_input = document.querySelector(".author");
@@ -8,7 +8,6 @@ const title_input = document.querySelector(".title");
 const pages_input = document.querySelector(".pages");
 const status_input = document.querySelector(".status")
 
- 
 // function constructor library
 function Library()
 {
@@ -49,10 +48,8 @@ Library.prototype.addBookToLibrary = function(book)
 
 // function displayInfo(bk)
 Library.prototype.displayInfoBook = function(book)
-{
+{    
     // add book to library instance and call the method addBookToLibrary
-    mainCard.textContent = "";
-
     lib.addBookToLibrary(book);
     lib.myLibraryOfBooks.forEach((indexBk) => 
     {   
@@ -62,13 +59,10 @@ Library.prototype.displayInfoBook = function(book)
         classAttName.value = "card";
         div.setAttributeNode(classAttName); 
 
-        // create and set the Header
-        const headerBk = document.createElement('h3');
-        
+        const headerBk = document.createElement('h3');        
         headerBk.textContent = indexBk.title;
         div.appendChild(headerBk);
 
-        // create a two more divs 
         const paraAuthor = document.createElement('p');
         paraAuthor.textContent = `Author: ${indexBk.author}`
         div.appendChild(paraAuthor);
@@ -104,26 +98,27 @@ Object.setPrototypeOf(openCloseDialog.prototype, Library.prototype)
 function openCloseDialog()
 {
     // open the dialog
-    modal.addEventListener('click',() => 
+    showModal.addEventListener('click',() => 
     {
         // open dialog
         dialog.showModal();
-        
-        // if usr presses submit btn event
-        submitBtn.addEventListener('click',(e) => 
-        {
-            lib.displayInfoBook();  
-        })      
-
-        // close the form
-        closeBtn.addEventListener('click',(e) => 
-        {
-            e.preventDefault();
-            dialog.close();
-        })
     })
-
     
+    submitBtn.addEventListener('click',(e) => 
+    {
+        mainCard.textContent = "";    
+        lib.displayInfoBook();
+        e.preventDefault();
+        dialog.close();  
+    }) 
+
+    // close the dialog form
+    closeModal.addEventListener('click',(e) => 
+    {
+        e.preventDefault();
+        dialog.close();
+        console.log("close form activated")
+    })    
 }
 
 openCloseDialog()

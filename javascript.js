@@ -74,15 +74,34 @@ Library.prototype.displayInfoBook = function(book)
         // create button and change status
         const statusBtn = document.createElement('button');
         statusBtn.textContent = `${indexBk.status}`;
+        if(statusBtn.textContent === "Completed")
+        {
+            statusBtn.style.backgroundColor = "#22c55e";
+            statusBtn.style.border = "none";
+            statusBtn.style.borderRadius = "4px";
+        }
+        else if(statusBtn.textContent = "Ongoing")
+        {
+            statusBtn.style.backgroundColor =  "#ef4444";
+            statusBtn.style.border = "none";
+            statusBtn.style.borderRadius = "4px";
+        }
+
         statusBtn.addEventListener('click',() => 
         {
             if(statusBtn.textContent === "Completed")
             {
                 statusBtn.textContent = "Ongoing";
+                statusBtn.style.backgroundColor =  "#ef4444";
+                statusBtn.style.border = "none";
+                statusBtn.style.borderRadius = "4px";
             }
             else if(statusBtn.textContent = "Ongoing")
             {
                 statusBtn.textContent = "Completed"
+                statusBtn.style.backgroundColor = "#22c55e";
+                statusBtn.style.border = "none";
+                statusBtn.style.borderRadius = "4px";
             }
         })
 

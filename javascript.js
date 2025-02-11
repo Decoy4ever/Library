@@ -8,6 +8,34 @@ const title_input = document.querySelector(".title");
 const pages_input = document.querySelector(".pages");
 const status_input = document.querySelector(".status")
 
+class Library
+{
+    constructor()
+    {
+        this.myCollectionBks = []
+    }
+
+    addBookToLib(bk)
+    {
+        this.myCollectionBks.push(bk)
+        return `Added to Lib -> ${bk.getBkDetails()}`
+    }
+
+    displayListOfBks()
+    {
+        if(this.myCollectionBks.length === 0)
+        {
+            return `No books have been Added`
+        }
+        else
+        {
+            return this.myCollectionBks.map((bk,index) => {
+                return `${bk.getBkDetails()} on Shelf ${index}`
+            })
+        }
+    }
+}
+
 class Book
 {
     constructor(title, author, num_pgs, status)
@@ -24,8 +52,12 @@ class Book
     }
 }
 
+const lib1 = new Library()
 const book1 = new Book("Harry potter", "JK", 1000, "Read")
-console.log(book1)
+const book2 = new Book("LOTR", "Tolken", 2000, "Read")
+lib1.addBookToLib(book1)
+lib1.addBookToLib(book2)
+console.log(lib1.displayListOfBks())
 
 
 // function constructor library

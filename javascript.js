@@ -28,17 +28,17 @@ class Library
 
 class Book
 {
-    constructor(title, author, num_pgs, status)
+    constructor(title, author, pages, status)
     {
         this.title = title;
         this.author = author;
-        this.num_pgs = num_pgs;
+        this.pages = pages;
         this.status = status
     }
 
     getBkDetails()
     {
-        return `Book: ${this.title}, Author: ${this.author}, Pages: ${this.num_pgs}, Status: ${this.status}`
+        return `Book: ${this.title}, Author: ${this.author}, Pages: ${this.pages}, Status: ${this.status}`
     }
 }
 
@@ -55,50 +55,57 @@ class UI
         this.title_input = document.querySelector(".title");
         this.pages_input = document.querySelector(".pages");
         this.status_input = document.querySelector(".status")
+        this.form = document.querySelector("form")
+        
         this.library = new Library()
     }
 
-    addFormUI()
+    addBksFromForm()
     {     
-        this.title = `${this.title_input.value}`
-        this.author = `${this.author_input.value}`
-        this.pages = `${this.pages_input.value}`
-        this.status = `${this.status_input.value}`
+        let title = this.title_input.value
+        let author = this.author_input.value
+        let pages = this.pages_input.value
+        let status = this.status_input.value
 
         // create the book
-        const book = new Book(this.title, this.author, this.pages, this.status)
+        const book = new Book(title, author, pages, status)
 
         // add new instance of book by calling the function addBookToLib
         this.library.addBookToLib(book)
+
+        // render the books
+        this.renderBooks()
     }
 
-    displayInfoUI()
+    renderBooks()
     {
-        this.addFormUI()
+        // clear any existing content
+        this.mainCard.textContent = "";    
 
         // print out each book
-        this.library.myCollectionBks.forEach((indexBk) => 
+        this.library.myCollectionBks.forEach((book,index) => 
         {
             const div = document.createElement('div');
-            const classAttName = document.createAttribute('class');
-            classAttName.value = "card";
-            div.setAttributeNode(classAttName); 
-
+            div.setAttribute("class","card")
+     
             const headerBk = document.createElement('h3');        
-            headerBk.textContent = indexBk.title;
+            headerBk.textContent = book.title;
             div.appendChild(headerBk);
 
             const paraAuthor = document.createElement('p');
-            paraAuthor.textContent = `Author: ${indexBk.author}`
+            paraAuthor.textContent = `Author: ${book.author}`
             div.appendChild(paraAuthor);
 
             const paraNumOfpgs = document.createElement('p');
-            paraNumOfpgs.textContent = `Pages: ${indexBk.pages}`
+            paraNumOfpgs.textContent = `Pages: ${book.pages}`
             div.appendChild(paraNumOfpgs);
 
             // create button and change status if clicking
             const statusBtn = document.createElement('button');
-            statusBtn.textContent = `${indexBk.status}`;
+            statusBtn.textContent = `${book.status}`;
+            // statusBtn.setAttribute("data-status",index)
+
+            
             if(statusBtn.textContent === "Completed")
             {
                 statusBtn.style.backgroundColor = "#22c55e";
@@ -134,7 +141,7 @@ class UI
         })
     }
   
-    DialogUI()
+    initDialogUI()
     {
         // open the dialog form
         this.showModal.addEventListener('click',() => 
@@ -144,24 +151,30 @@ class UI
         
         this.submitBtn.addEventListener('click',(e) => 
         {
-            this.mainCard.textContent = "";    
-            this.displayInfoUI();
+            this.addBksFromForm();
             e.preventDefault();
             this.dialog.close();  
         }) 
 
-        // // close the dialog form
+        // close the dialog form
         this.closeModal.addEventListener('click',(e) => 
         {
             e.preventDefault();
             this.dialog.close();
-            console.log("close form activated")
         }) 
     }
+
+    LoadUI()
+    {
+        this.initDialogUI()
+        this.renderBooks()
+    }
+
 }
 
 const ui = new UI()
-ui.DialogUI()
+ui.LoadUI()
+
 
 
 
